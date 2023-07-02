@@ -115,7 +115,7 @@ const PetList = () => {
         <ul className="flex flex-row gap-7">
           {pets
             .filter((pet) => pet.status === false)
-            .slice(0, 5)
+            .slice(0, 4)
             .map((pet, i) => (
               <PetCard key={i} pet={pet} onOpenModal={() => handleOpen(pet)} />
             ))}
