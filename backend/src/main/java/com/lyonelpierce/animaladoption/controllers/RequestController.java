@@ -1,8 +1,13 @@
 package com.lyonelpierce.animaladoption.controllers;
 
+import com.lyonelpierce.animaladoption.dtos.BreedDto;
+import com.lyonelpierce.animaladoption.dtos.PetDto;
 import com.lyonelpierce.animaladoption.dtos.RequestDto;
+import com.lyonelpierce.animaladoption.dtos.TypeDto;
+import com.lyonelpierce.animaladoption.entities.Breed;
 import com.lyonelpierce.animaladoption.entities.Pet;
 import com.lyonelpierce.animaladoption.entities.Request;
+import com.lyonelpierce.animaladoption.entities.Type;
 import com.lyonelpierce.animaladoption.services.PetService;
 import com.lyonelpierce.animaladoption.services.RequestService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +20,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-import com.lyonelpierce.animaladoption.dtos.RequestDto.RequestStatus;
 
 import java.util.List;
 import java.util.Optional;
@@ -41,30 +45,35 @@ public class RequestController {
     }
 
     @PostMapping(value = "/requests", consumes = { MediaType.MULTIPART_FORM_DATA_VALUE })
-    public ResponseEntity<String> addRequest(
-            @RequestParam("file") MultipartFile file,
-            @ModelAttribute @Validated RequestDto requestDto, BindingResult bindingResult)
-    {
+    public ResponseEntity<String> addRequest(@RequestPart("file") MultipartFile file, @Validated RequestDto requestDto, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Invalid request");
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Validation error");
         }
+
+        Long petId = requestDto.getPet().getId();
+        Optional<Pet> optionalPet = petService.getPetById(petId);
+        if (optionalPet.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Pet not found");
+        }
+
+        Pet pet = optionalPet.get();
+        requestDto.setPet(convertPetToPetDto(pet));
 
         Request request = convertRequestDtoToEntity(requestDto);
+        request.setIrsTaxPdf(file.getOriginalFilename());
 
-        String result = requestService.addRequest(file, request);
+        requestService.saveRequest(request);
 
-        if (result != null) {
-            // Send email
-            SimpleMailMessage mailMessage = new SimpleMailMessage();
-            mailMessage.setFrom("lyonel@live.com");
-            mailMessage.setTo(request.getEmail());
-            mailMessage.setSubject("Adoption Application Confirmation");
-            mailMessage.setText("Thank you for submitting your application, we will review it as soon as possible and get in contact with you about your application status.");
+        // Send email
+        SimpleMailMessage mailMessage = new SimpleMailMessage();
+        mailMessage.setFrom("lyonel@live.com");
+        mailMessage.setTo(request.getEmail());
+        mailMessage.setSubject("Application Received");
+        mailMessage.setText("Thank you for your application. We have received it and will process it shortly.");
 
-            mailSender.send(mailMessage);
-        }
+        mailSender.send(mailMessage);
 
-        return ResponseEntity.status(HttpStatus.CREATED).body(result);
+        return ResponseEntity.ok("Request added successfully");
     }
 
     @PutMapping("/approve/{id}")
@@ -120,6 +129,34 @@ public class RequestController {
         return ResponseEntity.ok("Status updated successfully");
     }
 
+    private PetDto convertPetToPetDto(Pet pet) {
+        PetDto petDto = new PetDto();
+        petDto.setId(pet.getId());
+        petDto.setName(pet.getName());
+        petDto.setAge(pet.getAge());
+        petDto.setGenre(pet.getGenre());
+        petDto.setDescription(pet.getDescription());
+        petDto.setStatus(pet.getStatus());
+        petDto.setImage(pet.getImage());
+        petDto.setBreed(convertBreedToBreedDto(pet.getBreed()));
+        petDto.setType(convertTypeToTypeDto(pet.getType()));
+        return petDto;
+    }
+
+    private BreedDto convertBreedToBreedDto(Breed breed) {
+        BreedDto breedDto = new BreedDto();
+        breedDto.setId(breed.getId());
+
+        return breedDto;
+    }
+
+    private TypeDto convertTypeToTypeDto(Type type) {
+        TypeDto typeDto = new TypeDto();
+        typeDto.setId(type.getId());
+
+        return typeDto;
+    }
+
     private Request convertRequestDtoToEntity(RequestDto requestDto) {
         Request request = new Request();
         request.setId(requestDto.getId());
@@ -135,14 +172,11 @@ public class RequestController {
         request.setHousingType(requestDto.getHousingType());
         request.setDependents(requestDto.getDependents());
         request.setIrsTaxPdf(requestDto.getIrsTaxPdf());
-        request.setStatus(Request.RequestStatus.valueOf(requestDto.getStatus().name()));
+        request.setStatus(Request.RequestStatus.PENDING);
 
+        PetDto petDto = requestDto.getPet();
         Pet pet = new Pet();
-        pet.setId(requestDto.getPet().getId());
-        pet.setName(requestDto.getPet().getName());
-        pet.setAge(requestDto.getPet().getAge());
-        pet.setStatus(requestDto.getPet().getStatus());
-
+        pet.setId(petDto.getId());
         request.setPet(pet);
 
         return request;

@@ -107,11 +107,17 @@ export default function RequestTable({ requests, handleToggle, handleReject }) {
       renderCell: (params) => (
         <>
           {params.row.col8 === "PENDING" ? (
-            <div className="bg-yellow-400 py-1 px-3 rounded-full">Pending</div>
+            <div className="bg-yellow-400 py-1 px-2 rounded-full text-xs font-semibold">
+              Pending
+            </div>
           ) : params.row.col8 === "REJECTED" ? (
-            <div className="bg-red-400 py-1 px-3 rounded-full">Rejected</div>
+            <div className="bg-red-400 py-1 px-2 rounded-full text-xs font-semibold">
+              Rejected
+            </div>
           ) : (
-            <div className="bg-green-400 py-1 px-3 rounded-full">Approved</div>
+            <div className="bg-green-400 py-1 px-2 rounded-full text-xs font-semibold">
+              Approved
+            </div>
           )}
         </>
       ),

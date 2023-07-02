@@ -30,20 +30,11 @@ public class RequestMapper {
         requestDto.setDependents(request.getDependents());
         requestDto.setIrsTaxPdf(request.getIrsTaxPdf());
 
-        RequestDto.RequestStatus requestStatus;
-        switch (request.getStatus()) {
-            case PENDING:
-                requestStatus = RequestDto.RequestStatus.PENDING;
-                break;
-            case APPROVED:
-                requestStatus = RequestDto.RequestStatus.APPROVED;
-                break;
-            case REJECTED:
-                requestStatus = RequestDto.RequestStatus.REJECTED;
-                break;
-            default:
-                throw new IllegalArgumentException("Unsupported request status: " + request.getStatus());
-        }
+        RequestDto.RequestStatus requestStatus = switch (request.getStatus()) {
+            case PENDING -> RequestDto.RequestStatus.PENDING;
+            case APPROVED -> RequestDto.RequestStatus.APPROVED;
+            case REJECTED -> RequestDto.RequestStatus.REJECTED;
+        };
         requestDto.setStatus(requestStatus);
 
         PetDto petDto = petService.mapPetToDto(request.getPet());

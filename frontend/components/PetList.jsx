@@ -5,7 +5,6 @@ import PetCard from "@components/PetCard";
 import Card from "@mui/material/Card";
 import Modal from "@mui/material/Modal";
 import Box from "@mui/material/Box";
-import { IconArrowRight } from "@tabler/icons-react";
 
 import { useState, useEffect } from "react";
 import AddRequest from "./AddRequest";
@@ -69,8 +68,8 @@ const PetList = () => {
     formData.append("email", formValues.email);
     formData.append("phoneNumber", formValues.phoneNumber);
     formData.append("zipCode", formValues.zipCode);
-    formData.append("pet", formValues.petId);
-    formData.append("status", false);
+    formData.append("pet.id", formValues.petId);
+    formData.append("status", "PENDING");
 
     fetch("http://localhost:8080/requests", {
       method: "POST",
@@ -78,6 +77,7 @@ const PetList = () => {
     })
       .then((response) => {
         if (response.ok) {
+          // console.log(response);
           handleClose();
           window.location.reload();
         }

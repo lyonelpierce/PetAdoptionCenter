@@ -23,7 +23,7 @@ const Nav = () => {
   return (
     <nav className="flex-between w-full mb-16 bg-neutral-900 drop-shadow-lg">
       <div className="container mx-auto flex justify-between items-center h-16">
-        <Link href="/" className="flex gap-2 flex-center">
+        <Link href="/" className="flex gap-3 flex-center">
           <Image
             src="/logo.svg"
             height={40}
@@ -31,9 +31,14 @@ const Nav = () => {
             className="object-contain"
             alt="Pawsome Logo"
           />
-          <h1 className="text-white flex items-center text-2xl text-yellow-400 font-normal">
-            Pawsome
-          </h1>
+          <div className=" flex flex-col inline-block">
+            <h1 className="text-white flex items-center text-2xl text-yellow-400 font-medium">
+              Pawsome
+            </h1>
+            <span className="text-white text-xs font-medium">
+              Your Pet Adoption Center
+            </span>
+          </div>
         </Link>
         <div className="sm:flex hidden">
           {session?.user ? (

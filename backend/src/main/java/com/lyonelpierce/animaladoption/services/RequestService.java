@@ -1,10 +1,8 @@
 package com.lyonelpierce.animaladoption.services;
 
 import com.lyonelpierce.animaladoption.dtos.RequestDto;
-import com.lyonelpierce.animaladoption.entities.Pet;
 import com.lyonelpierce.animaladoption.entities.Request;
 import com.lyonelpierce.animaladoption.mappers.RequestMapper;
-import com.lyonelpierce.animaladoption.repositories.PetRepository;
 import com.lyonelpierce.animaladoption.repositories.RequestRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -24,7 +22,6 @@ import java.util.stream.Collectors;
 public class RequestService {
 
     private final RequestRepository requestRepository;
-    private final PetService petService;
 
     private final RequestMapper requestMapper;
 
@@ -32,7 +29,6 @@ public class RequestService {
     public RequestService(RequestRepository requestRepository, RequestMapper requestMapper, PetService petService) {
         this.requestRepository = requestRepository;
         this.requestMapper = requestMapper;
-        this.petService = petService;
     }
 
     public String addRequest(MultipartFile file, Request request) {
@@ -77,8 +73,8 @@ public class RequestService {
         return requestRepository.findById(id);
     }
 
-    public Request saveRequest(Request request) {
-        return requestRepository.save(request);
+    public void saveRequest(Request request) {
+        requestRepository.save(request);
     }
 
 }
