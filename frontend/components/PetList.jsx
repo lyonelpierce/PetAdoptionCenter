@@ -131,7 +131,10 @@ const PetList = () => {
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
-        <Box sx={style} className="w-full h-full sm:w-3/6 sm:h-2/3">
+        <Box
+          sx={{ ...style, overflow: "auto" }}
+          className="w-full h-full sm:w-3/6 sm:h-auto"
+        >
           {selectedPet && (
             <>
               <h2 className="text-center text-2xl font-medium mb-7">
