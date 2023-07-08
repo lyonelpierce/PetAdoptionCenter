@@ -41,7 +41,9 @@ const PetList = () => {
   useEffect(() => {
     const fetchPets = async () => {
       try {
-        const response = await fetch("http://localhost:8080/pets");
+        const response = await fetch(
+          "https://petadoptioncenter-production.up.railway.app/pets"
+        );
         const data = await response.json();
         setPets(data);
       } catch (error) {
@@ -138,7 +140,10 @@ const PetList = () => {
               <div className="flex flex-row">
                 <div className="w-2/5 mr-5 flex flex-col">
                   <img
-                    src={`http://localhost:8080/images/` + selectedPet.image}
+                    src={
+                      `https://petadoptioncenter-production.up.railway.app/images/` +
+                      selectedPet.image
+                    }
                     alt="{selectedPet.name} Image"
                     className="rounded-lg"
                   />
