@@ -114,6 +114,8 @@ const PetList = () => {
       <Card className="p-7" sx={{ borderRadius: 1.5 }}>
         <ul className="flex flex-row gap-7">
           {pets
+            .sort((a, b) => b.id - a.id)
+
             .filter((pet) => pet.status === false)
             .slice(0, 4)
             .map((pet, i) => (
