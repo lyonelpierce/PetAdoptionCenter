@@ -24,7 +24,7 @@ const AddBreed = ({ onSubmit, editId, editName, editType, editTypeId }) => {
 
   useEffect(() => {
     // Fetch type options from the API endpoint
-    fetch("http://127.0.0.1:8080/types")
+    fetch("https://petadoptioncenter-production.up.railway.app/types")
       .then((response) => response.json())
       .then((data) => {
         setTypeOptions(data);

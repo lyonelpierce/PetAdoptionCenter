@@ -32,11 +32,14 @@ export default function BasicTable() {
       try {
         if (sessionLoaded && session && session.user && session.user.token) {
           const token = session.user.token;
-          const response = await fetch("http://localhost:8080/requests", {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          });
+          const response = await fetch(
+            "https://petadoptioncenter-production.up.railway.app/requests",
+            {
+              headers: {
+                Authorization: `Bearer ${token}`,
+              },
+            }
+          );
           const data = await response.json();
           setRequests(data);
         }
@@ -62,13 +65,16 @@ export default function BasicTable() {
       cancelButtonText: "Cancel",
     }).then((result) => {
       if (result.isConfirmed) {
-        fetch(`http://localhost:8080/approve/${id}`, {
-          method: "PUT",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
-          },
-        })
+        fetch(
+          `https://petadoptioncenter-production.up.railway.app/approve/${id}`,
+          {
+            method: "PUT",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        )
           .then((response) => {
             if (response.ok) {
               Swal.fire({
@@ -103,13 +109,16 @@ export default function BasicTable() {
       confirmButtonColor: "#f87171",
     }).then((result) => {
       if (result.isConfirmed) {
-        fetch(`http://localhost:8080/reject/${id}`, {
-          method: "PUT",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
-          },
-        })
+        fetch(
+          `https://petadoptioncenter-production.up.railway.app/reject/${id}`,
+          {
+            method: "PUT",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        )
           .then((response) => {
             if (response.ok) {
               Swal.fire({

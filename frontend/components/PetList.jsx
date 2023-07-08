@@ -71,7 +71,7 @@ const PetList = () => {
     formData.append("pet.id", formValues.petId);
     formData.append("status", "PENDING");
 
-    fetch("http://localhost:8080/requests", {
+    fetch("https://petadoptioncenter-production.up.railway.app/requests", {
       method: "POST",
       body: formData,
     })

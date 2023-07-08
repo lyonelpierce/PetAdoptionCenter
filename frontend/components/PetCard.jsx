@@ -13,7 +13,7 @@ const PetCard = ({ pet, onOpenModal }) => {
       <div className="flex flex-col h-full relative">
         <CardMedia
           component="img"
-          image={`http://localhost:8080/images/${pet.image}`}
+          image={`https://petadoptioncenter-production.up.railway.app/images/${pet.image}`}
           alt={pet.name}
           className="h-60"
         />

@@ -45,7 +45,9 @@ const AddPet = ({
 
   useEffect(() => {
     // Fetch the list of types from the backend
-    fetch("http://localhost:8080/typeswithoutbreeds")
+    fetch(
+      "https://petadoptioncenter-production.up.railway.app/typeswithoutbreeds"
+    )
       .then((response) => response.json())
       .then((data) => {
         setTypes(data);
@@ -58,7 +60,9 @@ const AddPet = ({
   useEffect(() => {
     // Fetch the list of breeds based on the selected type
     if (type !== "") {
-      fetch(`http://localhost:8080/breeds/${type}`)
+      fetch(
+        `https://petadoptioncenter-production.up.railway.app/breeds/${type}`
+      )
         .then((response) => response.json())
         .then((data) => {
           setBreeds(data);
@@ -90,9 +94,12 @@ const AddPet = ({
       {editPetId && (
         <img
           src={
-            editPetAvatar.startsWith("http://localhost:8080/images/")
+            editPetAvatar.startsWith(
+              "https://petadoptioncenter-production.up.railway.app/images/"
+            )
               ? editPetAvatar
-              : "http://localhost:8080/images/" + editPetAvatar
+              : "https://petadoptioncenter-production.up.railway.app/images/" +
+                editPetAvatar
           }
           alt="Pet Image"
           className="rounded-lg w-full h-60 object-cover"

@@ -43,8 +43,8 @@ export default function BasicTable() {
     }
 
     const endpoint = id
-      ? `http://localhost:8080/editpet/${id}`
-      : "http://localhost:8080/addpet";
+      ? `https://petadoptioncenter-production.up.railway.app/editpet/${id}`
+      : "https://petadoptioncenter-production.up.railway.app/addpet";
 
     fetch(endpoint, {
       method: "POST",
@@ -68,13 +68,16 @@ export default function BasicTable() {
   const handleToggle = (id) => {
     const token = session.user.token;
 
-    fetch(`http://localhost:8080/updatestatus/${id}`, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
-      },
-    })
+    fetch(
+      `https://petadoptioncenter-production.up.railway.app/updatestatus/${id}`,
+      {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    )
       .then((response) => {
         if (response.ok) {
           console.log("Status updated successfully");
@@ -91,12 +94,15 @@ export default function BasicTable() {
   const handleDelete = (id) => {
     const token = session.user.token;
 
-    fetch(`http://localhost:8080/deletepet/${id}`, {
-      method: "DELETE",
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    })
+    fetch(
+      `https://petadoptioncenter-production.up.railway.app/deletepet/${id}`,
+      {
+        method: "DELETE",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    )
       .then((response) => {
         if (response.ok) {
           // Remove the pet from the table
@@ -156,7 +162,9 @@ export default function BasicTable() {
   useEffect(() => {
     const fetchPets = async () => {
       try {
-        const response = await fetch("http://localhost:8080/pets");
+        const response = await fetch(
+          "https://petadoptioncenter-production.up.railway.app/pets"
+        );
         const data = await response.json();
         setPets(data);
       } catch (error) {

@@ -16,7 +16,7 @@ export default function PetTable({
     col1: pet.id,
     col2: {
       username: pet.name,
-      avatar: `http://localhost:8080/images/${pet.image}`,
+      avatar: `https://petadoptioncenter-production.up.railway.app/images/${pet.image}`,
       description: pet.description,
     },
     col3: pet.type.name,

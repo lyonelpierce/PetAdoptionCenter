@@ -129,7 +129,10 @@ export default function RequestTable({ requests, handleToggle, handleReject }) {
       renderCell: (params) => (
         <>
           <a
-            href={"http://localhost:8080/files/" + params.row.col9}
+            href={
+              "https://petadoptioncenter-production.up.railway.app/files/" +
+              params.row.col9
+            }
             target="_blank"
             rel="noreferrer"
           >
@@ -243,7 +246,7 @@ export default function RequestTable({ requests, handleToggle, handleReject }) {
                 Pet Info
               </Typography>
               <img
-                src={`http://localhost:8080/images/${selectedRow.col20}`}
+                src={`https://petadoptioncenter-production.up.railway.app/images/${selectedRow.col20}`}
                 alt="Pet Image"
                 className="rounded-lg mb-3"
               />
