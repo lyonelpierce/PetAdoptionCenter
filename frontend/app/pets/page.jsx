@@ -14,7 +14,7 @@ import AddPet from "@components/AddPet";
 import PetTable from "@components/PetTable";
 
 const style = {
-  width: 450,
+  width: 430,
   bgcolor: "#f3f4f6",
   p: 4,
 };

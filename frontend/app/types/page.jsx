@@ -16,7 +16,7 @@ import AddType from "@components/AddType";
 import TypeTable from "@components/TypeTable";
 
 const style = {
-  width: 450,
+  width: 430,
   bgcolor: "#f3f4f6",
   p: 4,
 };
@@ -138,14 +138,14 @@ export default function BasicTable() {
           <CardContent>
             <div className="flex flex-row justify-between p-3 mb-2">
               <Typography gutterBottom variant="h5" component="div">
-                Types
+                Species
               </Typography>
               <button
                 onClick={handleAdd}
                 className="text-sm font-medium bg-yellow-400 rounded-full px-4 py-2 text-black flex gap-1 items-center"
               >
                 <IconPlus strokeWidth="1.5" />
-                Add Type
+                Add Specie
               </button>
             </div>
             <TypeTable
@@ -168,7 +168,7 @@ export default function BasicTable() {
                 component="h2"
                 className="mb-2"
               >
-                {editName ? "Edit Type" : "Add Type"}
+                {editName ? "Edit Specie" : "Add Specie"}
               </Typography>
               <AddType
                 onSubmit={handleFormSubmit}

@@ -90,7 +90,7 @@ const AddPet = ({
   };
 
   return (
-    <form className="w-96 flex flex-col gap-3" onSubmit={handleSubmit}>
+    <form className="w-full flex flex-col gap-3 mt-5" onSubmit={handleSubmit}>
       {editPetId && (
         <img
           src={

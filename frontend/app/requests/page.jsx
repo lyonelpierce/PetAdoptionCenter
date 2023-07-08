@@ -11,7 +11,7 @@ import RequestTable from "@components/RequestTable";
 import Swal from "sweetalert2";
 
 const style = {
-  width: 450,
+  width: 430,
   bgcolor: "#f3f4f6",
   p: 4,
 };
