@@ -14,14 +14,17 @@ const handler = NextAuth({
         },
       },
       async authorize(credentials, req) {
-        const res = await fetch("http://localhost:8080/login", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            login: credentials?.login,
-            password: credentials?.password,
-          }),
-        });
+        const res = await fetch(
+          "https://petadoptioncenter-production.up.railway.app/login",
+          {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              login: credentials?.login,
+              password: credentials?.password,
+            }),
+          }
+        );
         const user = await res.json();
 
         if (res.ok && user) {
