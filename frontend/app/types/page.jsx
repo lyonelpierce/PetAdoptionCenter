@@ -36,7 +36,9 @@ export default function BasicTable() {
   useEffect(() => {
     const fetchTypes = async () => {
       try {
-        const response = await fetch("http://localhost:8080/types");
+        const response = await fetch(
+          "https://petadoptioncenter-production.up.railway.app/types"
+        );
         const data = await response.json();
         setTypes(data);
       } catch (error) {
@@ -59,8 +61,8 @@ export default function BasicTable() {
     const token = session.user.token;
 
     const endpoint = id
-      ? `http://localhost:8080/edittype/${id}`
-      : "http://localhost:8080/addtype";
+      ? `https://petadoptioncenter-production.up.railway.app/edittype/${id}`
+      : "https://petadoptioncenter-production.up.railway.app/addtype";
 
     fetch(endpoint, {
       method: "POST",
@@ -103,12 +105,15 @@ export default function BasicTable() {
         // Proceed with the deletion
         const token = session.user.token;
 
-        fetch(`http://localhost:8080/deletetype/${id}`, {
-          method: "DELETE",
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        })
+        fetch(
+          `https://petadoptioncenter-production.up.railway.app/deletetype/${id}`,
+          {
+            method: "DELETE",
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        )
           .then((response) => {
             if (response.ok) {
               // Remove the pet from the table
