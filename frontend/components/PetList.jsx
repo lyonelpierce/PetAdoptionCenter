@@ -14,7 +14,7 @@ const style = {
   top: "50%",
   left: "50%",
   transform: "translate(-50%, -50%)",
-  width: 800,
+  flex: 1,
   bgcolor: "#f3f4f6",
   boxShadow: 24,
   borderRadius: 3,
@@ -90,16 +90,16 @@ const PetList = () => {
   };
 
   return (
-    <section className="w-full flex-center flex-col">
+    <section className="w-full flex-center flex-col p-2">
       <div className="flex justify-between items-center mb-1">
-        <h2 className="text-xl font-medium mb-5">Adopt Me!</h2>
+        <h2 className="text-xl font-medium mb-">Adopt Me!</h2>
         {/* <button className="bg-yellow-400 px-4 py-2 rounded-full font-medium hover:bg-yellow-500 flex items-center">
           View More
           <IconArrowRight strokeWidth={1.5} size={20} />
         </button> */}
       </div>
       <Card className="p-5" sx={{ borderRadius: 1.5, flex: 1 }}>
-        <ul className="flex flex-row gap-7 flex-wrap">
+        <ul className="flex flex-col sm:flex-row gap-7 flex-wrap">
           {pets
             .sort((a, b) => b.id - a.id)
             .filter((pet) => pet.status === true)
@@ -114,7 +114,7 @@ const PetList = () => {
         <h2 className="text-xl font-medium mb-5">They made it!</h2>
       </div>
       <Card className="p-7" sx={{ borderRadius: 1.5 }}>
-        <ul className="flex flex-row gap-7">
+        <ul className="flex flex-col sm:flex-row gap-7 flex-wrap">
           {pets
             .sort((a, b) => b.id - a.id)
             .filter((pet) => pet.status === false)
@@ -131,14 +131,14 @@ const PetList = () => {
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
-        <Box sx={style}>
+        <Box sx={style} className="w-full h-full sm:w-3/6 sm:h-2/3">
           {selectedPet && (
             <>
               <h2 className="text-center text-2xl font-medium mb-7">
                 Request Adoption
               </h2>
-              <div className="flex flex-row">
-                <div className="w-2/5 mr-5 flex flex-col">
+              <div className="flex flex-col sm:flex-row">
+                <div className="sm:w-2/5 w-full mr-5 flex flex-col">
                   <img
                     src={
                       `https://petadoptioncenter-production.up.railway.app/images/` +
@@ -147,7 +147,7 @@ const PetList = () => {
                     alt="{selectedPet.name} Image"
                     className="rounded-lg"
                   />
-                  <ul className="mt-2">
+                  <ul className="mt-2 mb-5">
                     <li>
                       <h2 className="text-xl font-medium text-center">
                         {selectedPet.name}
@@ -175,7 +175,7 @@ const PetList = () => {
                     </li>
                   </ul>
                 </div>
-                <div className="w-2/3">
+                <div className="w-full sm:w-2/3">
                   <AddRequest
                     selectedPetId={selectedPetId}
                     onSubmit={handleFormSubmit}

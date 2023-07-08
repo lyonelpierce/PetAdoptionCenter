@@ -19,7 +19,7 @@ const Nav = () => {
   const pathname = usePathname();
 
   return (
-    <nav className="flex-between w-full mb-16 bg-neutral-900 drop-shadow-lg">
+    <nav className="flex-between w-full mb-4 sm:mb-12 bg-neutral-900 drop-shadow-lg">
       <div className="container mx-auto flex flex-wrap justify-between items-center h-16">
         <Link href="/" className="flex gap-3 flex-center">
           <Image
