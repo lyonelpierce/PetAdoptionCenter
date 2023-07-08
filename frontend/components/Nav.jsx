@@ -2,7 +2,6 @@
 
 import Link from "next/link";
 import Image from "next/image";
-
 import {
   IconLogout,
   IconLogin,
@@ -12,7 +11,6 @@ import {
   IconCat,
   IconHeartPlus,
 } from "@tabler/icons-react";
-
 import { usePathname } from "next/navigation";
 import { signIn, signOut, useSession } from "next-auth/react";
 
@@ -22,16 +20,16 @@ const Nav = () => {
 
   return (
     <nav className="flex-between w-full mb-16 bg-neutral-900 drop-shadow-lg">
-      <div className="container mx-auto flex justify-between items-center h-16">
+      <div className="container mx-auto flex flex-wrap justify-between items-center h-16">
         <Link href="/" className="flex gap-3 flex-center">
           <Image
             src="/logo.svg"
             height={40}
             width={40}
-            className="object-contain"
+            className="object-contain ml-2 sm:ml-0"
             alt="Pawsome Logo"
           />
-          <div className=" flex flex-col inline-block">
+          <div className="flex flex-col inline-block">
             <h1 className="text-white flex items-center text-2xl text-yellow-400 font-medium">
               Pawsome
             </h1>
@@ -40,7 +38,7 @@ const Nav = () => {
             </span>
           </div>
         </Link>
-        <div className="sm:flex hidden">
+        <div className="sm:flex mr-2 sm:mr-0">
           {session?.user ? (
             <div className="flex gap-3 md:gap-5">
               <button
@@ -65,13 +63,13 @@ const Nav = () => {
         </div>
       </div>
       {session?.user && (
-        <div className="bg-gray-200 w-full flex flex-between">
-          <div className="container mx-auto flex justify-between font-medium text-black">
-            <ul className="flex flex-row">
+        <div className="bg-gray-200 w-full">
+          <div className="container mx-auto">
+            <ul className="flex flex-wrap justify-between font-medium text-black items-center sm:py-1">
               <li
-                className={`h-12 items-center flex hover:bg-yellow-500 px-5 ${
+                className={`items-center flex hover:bg-yellow-500 px-5 ${
                   pathname === "/" ? "bg-yellow-400" : ""
-                }`}
+                } sm:w-auto sm:rounded-full sm: h-10 w-full sm:py-0 py-2`}
               >
                 <Link href="/" className="text-base flex gap-1 items-center">
                   <IconHome strokeWidth={1.5} size={21} />
@@ -79,9 +77,9 @@ const Nav = () => {
                 </Link>
               </li>
               <li
-                className={`h-12 items-center flex hover:bg-yellow-500 px-5 ${
+                className={`items-center flex hover:bg-yellow-500 px-5 ${
                   pathname === "/types" ? "bg-yellow-400" : ""
-                }`}
+                } sm:w-auto sm:rounded-full sm: h-10 w-full sm:py-0 py-2`}
               >
                 <Link
                   href="/types"
@@ -92,9 +90,9 @@ const Nav = () => {
                 </Link>
               </li>
               <li
-                className={`h-12 items-center flex hover:bg-yellow-500 px-5 ${
+                className={`items-center flex hover:bg-yellow-500 px-5 ${
                   pathname === "/breeds" ? "bg-yellow-400" : ""
-                }`}
+                } sm:w-auto sm:rounded-full sm: h-10 w-full sm:py-0 py-2`}
               >
                 <Link
                   href="/breeds"
@@ -105,9 +103,9 @@ const Nav = () => {
                 </Link>
               </li>
               <li
-                className={`h-12 items-center flex hover:bg-yellow-500 px-5 ${
+                className={`items-center flex hover:bg-yellow-500 px-5 ${
                   pathname === "/pets" ? "bg-yellow-400" : ""
-                }`}
+                } sm:w-auto sm:rounded-full sm: h-10 w-full sm:py-0 py-2`}
               >
                 <Link
                   href="/pets"
@@ -118,9 +116,9 @@ const Nav = () => {
                 </Link>
               </li>
               <li
-                className={`h-12 items-center flex hover:bg-yellow-500 px-5 ${
+                className={`items-center flex hover:bg-yellow-500 px-5 ${
                   pathname === "/requests" ? "bg-yellow-400" : ""
-                }`}
+                } sm:w-auto sm:rounded-full sm: h-10 w-full sm:py-0 py-2`}
               >
                 <Link
                   href="/requests"
