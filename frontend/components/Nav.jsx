@@ -20,16 +20,10 @@ const Nav = () => {
   const pathname = usePathname();
 
   useEffect(() => {
-    const tokenExpired = session?.user?.exp * 1000 < Date.now(); // Check if token has expired
-
-    if (tokenExpired) {
-      handleSignOut(); // Log out the user if the token has expired
+    if (Date.now() >= session?.user?.exp * 1000) {
+      signOut();
     }
   }, [session]);
-
-  const handleSignOut = () => {
-    signOut({ callbackUrl: "/login" }); // Redirect to login page after sign-out
-  };
 
   return (
     <nav className="flex-between w-full mb-4 sm:mb-12 bg-neutral-900 drop-shadow-lg">

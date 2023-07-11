@@ -37,13 +37,9 @@ const handler = NextAuth({
   ],
   callbacks: {
     async jwt({ token, user }) {
-      if (token.exp && Date.now() > token.exp) {
-        return { ...token, expired: true };
-      }
       return { ...token, ...user };
     },
     async session({ session, token }) {
-      console.log("session", session);
       session.user = token;
       return session;
     },
