@@ -20,9 +20,8 @@ const Nav = () => {
   const pathname = usePathname();
 
   useEffect(() => {
-    console.log("expired");
     if (Date.now() >= session?.user?.exp * 1000) {
-      signOut();
+      signOut({ callbackUrl: "/login" });
     }
   }, [session]);
 
