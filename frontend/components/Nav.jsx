@@ -21,7 +21,7 @@ const Nav = () => {
 
   useEffect(() => {
     if (Date.now() >= session?.user?.exp * 1000) {
-      signOut({ callbackUrl: "/login" });
+      signOut();
     }
   }, [session]);
 

@@ -16,6 +16,7 @@
     "@mui/x-data-grid": "^6.9.0",
     "@tabler/icons-react": "^2.23.0",
     "autoprefixer": "10.4.14",
+    "jwt-decode": "^3.1.2",
     "next": "13.4.7",
     "next-auth": "^4.22.1",
     "nodemailer": "^6.9.3",

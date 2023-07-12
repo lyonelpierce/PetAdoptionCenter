@@ -1,5 +1,6 @@
 import NextAuth from "next-auth/next";
 import CredentialsProvider from "next-auth/providers/credentials";
+import jwtDecode from "jwt-decode";
 
 const handler = NextAuth({
   providers: [
@@ -37,6 +38,14 @@ const handler = NextAuth({
   ],
   callbacks: {
     async jwt({ token, user }) {
+      if (token) {
+        try {
+          const decodedToken = jwtDecode(token.token);
+          token.exp = decodedToken.exp;
+        } catch (error) {
+          console.error("Error decoding JWT token:", error);
+        }
+      }
       return { ...token, ...user };
     },
     async session({ session, token }) {
