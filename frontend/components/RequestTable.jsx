@@ -122,25 +122,25 @@ export default function RequestTable({ requests, handleToggle, handleReject }) {
         </>
       ),
     },
-    {
-      field: "col9",
-      headerName: "Tax Info",
-      flex: 1,
-      renderCell: (params) => (
-        <>
-          <a
-            href={
-              "https://petadoptioncenter-production.up.railway.app/files/" +
-              params.row.col9
-            }
-            target="_blank"
-            rel="noreferrer"
-          >
-            <IconFileDownload className="cursor-pointer text-blue-600" />
-          </a>
-        </>
-      ),
-    },
+    // {
+    //   field: "col9",
+    //   headerName: "Tax Info",
+    //   flex: 1,
+    //   renderCell: (params) => (
+    //     <>
+    //       <a
+    //         href={
+    //           "https://petadoptioncenter-production.up.railway.app/files/" +
+    //           params.row.col9
+    //         }
+    //         target="_blank"
+    //         rel="noreferrer"
+    //       >
+    //         <IconFileDownload className="cursor-pointer text-blue-600" />
+    //       </a>
+    //     </>
+    //   ),
+    // },
     {
       field: "col10",
       headerName: "Actions",
