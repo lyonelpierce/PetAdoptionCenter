@@ -48,7 +48,7 @@ const AddBreed = ({ onSubmit, editId, editName, editType, editTypeId }) => {
         />
       </label>
       <label className="flex flex-col gap-2">
-        Type:
+        Specie:
         <select
           className="rounded-md p-2 w-full"
           value={type}

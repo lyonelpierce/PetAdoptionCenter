@@ -93,30 +93,42 @@ export default function BasicTable() {
 
   // DELETE PET WITH TOKEN
   const handleDelete = (id) => {
-    const token = session.user.token;
-
-    fetch(
-      `https://petadoptioncenter-production.up.railway.app/deletepet/${id}`,
-      {
-        method: "DELETE",
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#d33",
+      cancelButtonColor: "#3085d6",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        // Proceed with the deletion
+        const token = session.user.token;
+        fetch(
+          `https://petadoptioncenter-production.up.railway.app/deletepet/${id}`,
+          {
+            method: "DELETE",
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        )
+          .then((response) => {
+            if (response.ok) {
+              // Remove the pet from the table
+              const updatedPets = pets.filter((pet) => pet.id !== id);
+              setPets(updatedPets);
+              console.log("Pet deleted successfully");
+            } else {
+              throw new Error("Failed to delete pet");
+            }
+          })
+          .catch((error) => {
+            console.error("Error deleting pet:", error);
+          });
       }
-    )
-      .then((response) => {
-        if (response.ok) {
-          // Remove the pet from the table
-          const updatedPets = pets.filter((pet) => pet.id !== id);
-          setPets(updatedPets);
-          console.log("Pet deleted successfully");
-        } else {
-          throw new Error("Failed to delete pet");
-        }
-      })
-      .catch((error) => {
-        console.error("Error deleting pet:", error);
-      });
+    });
   };
 
   // HANDLE ADD PET

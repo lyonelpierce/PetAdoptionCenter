@@ -101,7 +101,6 @@ export default function BasicTable() {
     setEditName(name);
     setEditType(type);
     setEditTypeId(typeId);
-    console.log(id, name, type, typeId);
 
     handleOpen();
   };
@@ -137,7 +136,7 @@ export default function BasicTable() {
               setBreeds(updatedBreeds);
               console.log("Type deleted successfully");
             } else {
-              throw new Error("Failed to delete type");
+              throw new Error("Failed to delete specie");
             }
           })
           .catch((error) => {
