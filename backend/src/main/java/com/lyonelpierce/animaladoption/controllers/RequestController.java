@@ -44,8 +44,8 @@ public class RequestController {
         return requestService.getAllRequests();
     }
 
-    @PostMapping(value = "/requests", consumes = { MediaType.MULTIPART_FORM_DATA_VALUE })
-    public ResponseEntity<String> addRequest(@RequestPart("file") MultipartFile file, @Validated RequestDto requestDto, BindingResult bindingResult) {
+    @PostMapping("/requests")
+    public ResponseEntity<String> addRequest(@Validated RequestDto requestDto, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Validation error");
         }
@@ -60,7 +60,6 @@ public class RequestController {
         requestDto.setPet(convertPetToPetDto(pet));
 
         Request request = convertRequestDtoToEntity(requestDto);
-        request.setIrsTaxPdf(file.getOriginalFilename());
 
         requestService.saveRequest(request);
 
@@ -171,7 +170,6 @@ public class RequestController {
         request.setAnnualIncome(requestDto.getAnnualIncome());
         request.setHousingType(requestDto.getHousingType());
         request.setDependents(requestDto.getDependents());
-        request.setIrsTaxPdf(requestDto.getIrsTaxPdf());
         request.setStatus(Request.RequestStatus.PENDING);
 
         PetDto petDto = requestDto.getPet();

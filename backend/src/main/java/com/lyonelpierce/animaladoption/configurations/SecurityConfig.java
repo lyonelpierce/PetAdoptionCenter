@@ -31,7 +31,7 @@ public class SecurityConfig {
                 .authorizeHttpRequests((requests) -> requests
                         .requestMatchers(HttpMethod.POST, "/login", "/register", "/requests").permitAll()
                         .requestMatchers(HttpMethod.GET, "/pets", "/types", "/breeds","/breeds/{typeId}", "/typeswithoutbreeds", "/requests").permitAll()
-                        .requestMatchers("/images/**", "/files/**").permitAll()
+                        .requestMatchers("/images/**").permitAll()
                         .anyRequest().authenticated()
                 );
         return http.build();

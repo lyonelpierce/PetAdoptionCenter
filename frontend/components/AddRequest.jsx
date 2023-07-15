@@ -13,7 +13,6 @@ const AddRequest = ({ selectedPetId, onSubmit }) => {
     annualIncome: "",
     dependents: "",
     housingType: "House",
-    taxDeclaration: null,
   });
 
   const handleChange = (e) => {
@@ -22,14 +21,6 @@ const AddRequest = ({ selectedPetId, onSubmit }) => {
       ...prevValues,
       [name]: value,
       petId: selectedPetId,
-    }));
-  };
-
-  const handleFileChange = (event) => {
-    const file = event.target.files[0];
-    setFormValues((prevValues) => ({
-      ...prevValues,
-      taxDeclaration: file,
     }));
   };
 
@@ -49,7 +40,6 @@ const AddRequest = ({ selectedPetId, onSubmit }) => {
       annualIncome: "",
       dependents: "",
       housingType: "House",
-      taxDeclaration: null,
     });
   };
 
@@ -183,15 +173,6 @@ const AddRequest = ({ selectedPetId, onSubmit }) => {
           <option value="House">House</option>
           <option value="Apartment">Apartment</option>
         </select>
-      </label>
-      <label className="flex flex-col gap-2 mt-1">
-        Tax Declaration (Most Recent):
-        <input
-          type="file"
-          name="file"
-          className="rounded-md p-2 w-full"
-          onChange={handleFileChange}
-        />
       </label>
       <button
         type="submit"
