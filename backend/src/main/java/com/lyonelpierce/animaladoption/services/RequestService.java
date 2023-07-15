@@ -31,35 +31,9 @@ public class RequestService {
         this.requestMapper = requestMapper;
     }
 
-    public String addRequest(MultipartFile file, Request request) {
-        String fileName = saveFile(file);
-        request.setIrsTaxPdf(fileName);
+    public String addRequest(Request request) {
         requestRepository.save(request);
         return "Pet added successfully";
-    }
-
-    private String saveFile(MultipartFile file) {
-        // Generate a random file name
-        String fileName = UUID.randomUUID().toString() + "-" + StringUtils.cleanPath(file.getOriginalFilename());
-
-        // Define the target directory and path
-        Path targetDirectory = Path.of("src/main/resources/static/files");
-        Path targetPath = targetDirectory.resolve(fileName);
-
-        try {
-            // Create the target directory if it doesn't exist
-            if (!Files.exists(targetDirectory)) {
-                Files.createDirectories(targetDirectory);
-            }
-
-            // Save the image file to the target path
-            Files.copy(file.getInputStream(), targetPath, StandardCopyOption.REPLACE_EXISTING);
-
-            return fileName;
-        } catch (IOException e) {
-            e.printStackTrace();
-            return null;
-        }
     }
 
     public List<RequestDto> getAllRequests() {

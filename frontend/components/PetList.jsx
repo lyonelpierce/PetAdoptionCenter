@@ -73,7 +73,7 @@ const PetList = () => {
     formData.append("pet.id", formValues.petId);
     formData.append("status", "PENDING");
 
-    fetch("https://petadoptioncenter-production.up.railway.app/requests", {
+    fetch("http://localhost:8080/requests", {
       method: "POST",
       body: formData,
     })
@@ -93,10 +93,6 @@ const PetList = () => {
     <section className="w-full flex-center flex-col p-2">
       <div className="flex justify-between items-center mb-1">
         <h2 className="text-xl font-medium mb-">Adopt Me!</h2>
-        {/* <button className="bg-yellow-400 px-4 py-2 rounded-full font-medium hover:bg-yellow-500 flex items-center">
-          View More
-          <IconArrowRight strokeWidth={1.5} size={20} />
-        </button> */}
       </div>
       <Card className="p-5" sx={{ borderRadius: 1.5, flex: 1 }}>
         <ul className="flex flex-col sm:flex-row gap-7 flex-wrap">

@@ -28,7 +28,6 @@ public class RequestMapper {
         requestDto.setAnnualIncome(request.getAnnualIncome());
         requestDto.setHousingType(request.getHousingType());
         requestDto.setDependents(request.getDependents());
-        requestDto.setIrsTaxPdf(request.getIrsTaxPdf());
 
         RequestDto.RequestStatus requestStatus = switch (request.getStatus()) {
             case PENDING -> RequestDto.RequestStatus.PENDING;

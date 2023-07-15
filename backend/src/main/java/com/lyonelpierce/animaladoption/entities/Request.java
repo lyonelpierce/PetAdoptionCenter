@@ -38,8 +38,6 @@ public class Request {
     private String housingType;
     @Column(name="dependents", nullable = false)
     private Integer dependents;
-    @Column(name="tax_file", nullable = false)
-    private String irsTaxPdf;
     @Enumerated(EnumType.STRING)
     @Column(name = "status", nullable = false)
     private RequestStatus status;

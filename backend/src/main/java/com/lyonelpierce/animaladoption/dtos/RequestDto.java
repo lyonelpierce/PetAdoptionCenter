@@ -20,7 +20,6 @@ public class RequestDto {
     private String annualIncome;
     private String housingType;
     private Integer dependents;
-    private String irsTaxPdf;
     private RequestStatus status;
     private PetDto pet;
     public enum RequestStatus {
