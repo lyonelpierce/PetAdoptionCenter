@@ -10,12 +10,6 @@ import CardContent from "@mui/material/CardContent";
 import RequestTable from "@components/RequestTable";
 import Swal from "sweetalert2";
 
-const style = {
-  width: 430,
-  bgcolor: "#f3f4f6",
-  p: 4,
-};
-
 export default function BasicTable() {
   const { data: session, loading } = useSession();
   const [requests, setRequests] = useState([]);
@@ -53,8 +47,6 @@ export default function BasicTable() {
 
   // APPROVE STATUS WITH TOKEN
   const handleToggle = (id) => {
-    const token = session.user.token;
-
     Swal.fire({
       title: "Are you sure?",
       text: "You are about to approve the status and send an approval email to the user.",
@@ -65,6 +57,7 @@ export default function BasicTable() {
       cancelButtonText: "Cancel",
     }).then((result) => {
       if (result.isConfirmed) {
+        const token = session.user.token;
         fetch(
           `https://petadoptioncenter-production.up.railway.app/approve/${id}`,
           {

@@ -51,7 +51,6 @@ export default function RequestTable({ requests, handleToggle, handleReject }) {
           col6: request.annualIncome,
           col7: request.housingType,
           col8: request.status,
-          col9: request.irsTaxPdf,
           col10: request.pet.id,
           col11: request.pet.type.name,
           col12: request.pet.breed.name,
@@ -122,25 +121,6 @@ export default function RequestTable({ requests, handleToggle, handleReject }) {
         </>
       ),
     },
-    // {
-    //   field: "col9",
-    //   headerName: "Tax Info",
-    //   flex: 1,
-    //   renderCell: (params) => (
-    //     <>
-    //       <a
-    //         href={
-    //           "https://petadoptioncenter-production.up.railway.app/files/" +
-    //           params.row.col9
-    //         }
-    //         target="_blank"
-    //         rel="noreferrer"
-    //       >
-    //         <IconFileDownload className="cursor-pointer text-blue-600" />
-    //       </a>
-    //     </>
-    //   ),
-    // },
     {
       field: "col10",
       headerName: "Actions",

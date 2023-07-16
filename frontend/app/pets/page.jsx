@@ -10,6 +10,8 @@ import CardContent from "@mui/material/CardContent";
 
 import { IconPlus } from "@tabler/icons-react";
 
+import Swal from "sweetalert2";
+
 import AddPet from "@components/AddPet";
 import PetTable from "@components/PetTable";
 
